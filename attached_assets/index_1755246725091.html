@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Медитация</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; background: linear-gradient(#d8f3dc,#b7e4c7); color: #1b4332; }
+  .circle { width: 150px; height: 150px; background: rgba(64,145,108,0.8); border-radius: 50%; margin: 30px auto; animation: breathe 8s infinite ease-in-out; }
+  @keyframes breathe { 0%,100% { transform: scale(1); } 25% { transform: scale(1.5); } 75% { transform: scale(0.8); } }
+  .instruction { font-size: 22px; margin-bottom: 20px; }
+  button { background: #40916c; color: white; padding: 12px 25px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+  button:hover { background: #2d6a4f; }
+</style>
+</head>
+<body>
+<h1>Медитация дыхания</h1>
+<div class="instruction">Нажмите «Старт»</div>
+<div class="circle" style="display:none;"></div>
+<button id="startBtn">Старт</button>
+<audio id="bgSound" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1b1a3d5c1a.mp3?filename=meditation-music-140084.mp3" type="audio/mpeg">
+</audio>
+<script>
+let btn = document.getElementById("startBtn");
+let circle = document.querySelector(".circle");
+let sound = document.getElementById("bgSound");
+let instruction = document.querySelector(".instruction");
+
+btn.addEventListener("click", () => {
+  circle.style.display = "block";
+  instruction.textContent = "Вдох... Выдох...";
+  btn.style.display = "none";
+  sound.play();
+  setTimeout(() => {
+    sound.pause();
+    circle.style.display = "none";
+    instruction.textContent = "Медитация завершена 🧘";
+    btn.style.display = "block";
+  }, 60000); // 60 секунд
+});
+</script>
+</body>
+</html>
